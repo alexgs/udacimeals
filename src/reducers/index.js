@@ -45,7 +45,7 @@ export const calendarReducer = function( state=initialCalendarState, action ) {
                 ...state,
                 [ action.day ]: {
                     ...state[ action.day ],
-                    [ action.meal ]: action.recipe
+                    [ action.meal ]: action.recipe          // TODO use `recipe.label` instead? See App component.
                 }
             };
         case REMOVE_FROM_CALENDAR:
