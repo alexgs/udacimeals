@@ -1,3 +1,4 @@
+import { combineReducers } from 'redux';
 import { ADD_RECIPE, REMOVE_FROM_CALENDAR } from '../actions';
 
 const initialCalendarState = {
@@ -38,14 +39,14 @@ const initialCalendarState = {
     }
 };
 
-export const calendarReducer = function( state=initialCalendarState, action ) {
+const calendarReducer = function( state=initialCalendarState, action ) {
     switch ( action.type ) {
         case ADD_RECIPE:
             return {
                 ...state,
                 [ action.day ]: {
                     ...state[ action.day ],
-                    [ action.meal ]: action.recipe          // TODO use `recipe.label` instead? See App component.
+                    [ action.meal ]: action.recipe.label
                 }
             };
         case REMOVE_FROM_CALENDAR:
@@ -60,3 +61,20 @@ export const calendarReducer = function( state=initialCalendarState, action ) {
             return state;
     }
 };
+
+const foodReducer = function( state={}, action ) {
+    switch( action.type ) {
+        case ADD_RECIPE:
+            return {
+                ...state,
+                [ action.recipe.label ]: action.recipe
+            };
+        default:
+            return state;
+    }
+};
+
+export default combineReducers( {
+    calendar: calendarReducer,
+    food: foodReducer
+} );

@@ -11,9 +11,16 @@ class App extends Component {
     }
 }
 
-function mapStateToProps( state ) {
+function mapStateToProps( { calendar, food } ) {
+    const dayOrder = [ 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday' ];
     return {
-        calendar: state
+        calendar: dayOrder.map( day => ( {
+            day,
+            meals: Object.keys( calendar[day] ).reduce( ( todaysMeals, currentMeal ) => {
+                todaysMeals[currentMeal] = calendar[day][currentMeal] ? food[ calendar[day][currentMeal] ] : null;
+                return todaysMeals;
+            }, {} )
+        } ) )
     };
 }
 

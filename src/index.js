@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import App from './components/App';
-import { calendarReducer } from './reducers';
+import reducer from './reducers';
 import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 const store = createStore(
-    calendarReducer,
+    reducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     );
 
